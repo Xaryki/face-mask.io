@@ -16,33 +16,42 @@
     <script src="https://unpkg.com/@tensorflow-models/face-landmarks-detection@0.0.1/dist/face-landmarks-detection.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/webcam-easy@1.1.0/dist/webcam-easy.min.js"></script>
     <script type="text/javascript" src="js/webcam-ui-lib.js"></script>
-        <script type="text/javascript">
-        // Определение переменной для хранения захваченных данных изображения
-        var capturedImageData;
+    <!-- Добавление элемента для отображения захваченного изображения -->
+    <img id="captured-image" src="" style="display: none;">
 
-        // Функция для захвата текущего кадра
-        function captureFrame() {
-            var canvas = document.getElementById('canvas');
-            var video = document.getElementById('webcam');
-            
-            // Установка размеров холста, чтобы соответствовать размеру видео
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
+<!-- Модификация функции captureFrame() для отображения и сохранения изображения -->
+<script type="text/javascript">
+    function captureFrame() {
+        var canvas = document.getElementById('canvas');
+        var video = document.getElementById('webcam');
+        var capturedImage = document.getElementById('captured-image');
+        
+        // Установка размеров холста, чтобы соответствовать размеру видео
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
 
-            // Рисование текущего кадра видео на холсте
-            var context = canvas.getContext('2d');
-            context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+        // Рисование текущего кадра видео на холсте
+        var context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
 
-            // Получение данных изображения из холста
-            capturedImageData = canvas.toDataURL('image/png');
+        // Получение данных изображения из холста
+        capturedImageData = canvas.toDataURL('image/png');
 
-            // Вы можете предпринять действия с capturedImageData, например, отправить на сервер или отобразить на странице
-            console.log('Кадр захвачен!');
-        }
+        // Отображение захваченного изображения
+        capturedImage.src = capturedImageData;
+        capturedImage.style.display = 'block';
 
-        // Слушатель событий для кнопки захвата
-        document.getElementById('capture-btn').addEventListener('click', captureFrame);
-    </script>
+        // Вы можете предпринять действия с capturedImageData, например, отправить на сервер
+
+        // Предоставление возможности пользователю сохранить изображение
+        var downloadLink = document.createElement('a');
+        downloadLink.href = capturedImageData;
+        downloadLink.download = 'captured_image.png';
+        downloadLink.click();
+        
+        console.log('Кадр захвачен!');
+    }
+</script>
 </head>
 <body>
     
