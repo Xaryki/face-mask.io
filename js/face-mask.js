@@ -217,8 +217,8 @@ function drawMask(predictions){
             }
             
             
-            maskTop = maskCoordinate.top - ((maskHeight * (maskSizeAdjustmentHeight-1))/2) - (maskHeight * maskSizeAdjustmentTop);
-            maskLeft = maskCoordinate.left - ((maskWidth * (maskSizeAdjustmentWidth-1))/2) - (maskWidth * maskSizeAdjustmentLeft);
+            maskTop = maskCoordinate.top - ((maskHeight * (maskSizeAdjustmentHeight-1)) - 50) - (maskHeight * maskSizeAdjustmentTop);
+            maskLeft = maskCoordinate.left - ((maskWidth * (maskSizeAdjustmentWidth-1))) - (maskWidth * maskSizeAdjustmentLeft);
             
             maskElement.css({
                 top: maskTop, 
